@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIS AL-WATHONIYYAH 01 | Cerdas, Islami, Berprestasi</title>
+    <!-- Memuat Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Konfigurasi kustom Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'islamic-green': '#0e7040',
+                        'islamic-green-light': '#1b8a53',
+                        'islamic-gold': '#f5a623',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Google Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex: 1; }
+        .hero-pattern {
+            background-color: #0e7040;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231b8a53' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* Styling untuk navigasi aktif */
+        .nav-link.active {
+            border-bottom: 2px solid #f5a623;
+            color: #f5a623;
+        }
+        /* Animasi fade in untuk transisi halaman */
+        .page-content {
+            display: none;
+            animation: fadeInPage 0.5s ease-in-out;
+        }
+        .page-content.active-page {
+            display: block;
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <header class="bg-islamic-green text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo & Nama -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('beranda')">
+                <div class="bg-white rounded-full p-1 h-12 w-12 flex items-center justify-center overflow-hidden">
+                    <img src="./LOGOa1awtext1a 900x900.jpg" alt="Logo MIS Al-Wathoniyyah 01" class="h-full w-full object-contain" onerror="this.src='https://placehold.co/100x100/0e7040/ffffff?text=Logo'">
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold leading-tight">MIS AL-WATHONIYYAH 01</h1>
+                    <p class="text-xs md:text-sm text-gray-200">Terakreditasi "A" | Semarang</p>
+                </div>
+            </div>
+
+            <!-- Tombol Hamburger Mobile -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <button onclick="showPage('beranda')" class="nav-link hover:text-islamic-gold transition active" data-target="beranda">Beranda</button>
+                <button onclick="showPage('profil')" class="nav-link hover:text-islamic-gold transition" data-target="profil">Profil</button>
+                
+                <!-- Dropdown Akademik & Kesiswaan -->
+                <div class="relative group">
+                    <button class="nav-link flex items-center hover:text-islamic-gold transition cursor-pointer py-1 focus:outline-none font-medium" data-target="akademik,kesiswaan">
+                        Akademik <i class="fa-solid fa-chevron-down ml-1 text-[10px] transition-transform duration-300 group-hover:rotate-180"></i>
+                    </button>
+                    <!-- Sub-menu -->
+                    <div class="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border-t-4 border-islamic-gold transform origin-top scale-95 group-hover:scale-100">
+                        <button onclick="showPage('akademik')" class="w-full text-left block px-4 py-3 text-sm hover:bg-islamic-green hover:text-white transition-colors rounded-t-sm">Program Akademik</button>
+                        <button onclick="showPage('kesiswaan')" class="w-full text-left block px-4 py-3 text-sm hover:bg-islamic-green hover:text-white transition-colors border-t border-gray-100 rounded-b-sm">Kesiswaan (Data)</button>
+                    </div>
+                </div>
+
+                <button onclick="showPage('berita')" class="nav-link hover:text-islamic-gold transition" data-target="berita">Berita</button>
+                <button onclick="showPage('ppdb')" class="nav-link hover:text-islamic-gold transition font-bold text-islamic-gold" data-target="ppdb">PPDB</button>
+                <button onclick="showPage('keuangan')" class="nav-link hover:text-islamic-gold transition" data-target="keuangan">Keuangan</button>
+            </nav>
+        </div>
+
+        <!-- Menu Mobile (Tersembunyi secara default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-islamic-green-light pb-4 px-4 space-y-2 shadow-inner">
+            <button onclick="showPage('beranda')" class="w-full text-left block py-2 border-b border-islamic-green hover:text-islamic-gold mobile-nav-link" data-target="beranda">Beranda</button>
+            <button onclick="showPage('profil')" class="w-full text-left block py-2 border-b border-islamic-green hover:text-islamic-gold mobile-nav-link" data-target="profil">Profil</button>
+            
+            <!-- Menu Akademik & Kesiswaan di Mobile -->
+            <div class="border-b border-islamic-green">
+                <button id="mobile-akademik-btn" class="w-full text-left py-2 flex justify-between items-center hover:text-islamic-gold focus:outline-none transition-colors">
+                    <span>Akademik</span>
+                    <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300" id="mobile-akademik-icon"></i>
+                </button>
+                <div id="mobile-akademik-menu" class="hidden flex-col bg-islamic-green/50 rounded-lg mb-2 overflow-hidden transition-all duration-300">
+                    <button onclick="showPage('akademik')" class="w-full text-left block py-2 px-4 hover:bg-islamic-green hover:text-islamic-gold text-sm border-b border-islamic-green/30 mobile-nav-link" data-target="akademik">Program Akademik</button>
+                    <button onclick="showPage('kesiswaan')" class="w-full text-left block py-2 px-4 hover:bg-islamic-green hover:text-islamic-gold text-sm mobile-nav-link" data-target="kesiswaan">Data Kesiswaan</button>
+                </div>
+            </div>
+            
+            <button onclick="showPage('berita')" class="w-full text-left block py-2 border-b border-islamic-green hover:text-islamic-gold mobile-nav-link" data-target="berita">Berita</button>
+            <button onclick="showPage('ppdb')" class="w-full text-left block py-2 border-b border-islamic-green text-islamic-gold font-bold mobile-nav-link" data-target="ppdb">PPDB</button>
+            <button onclick="showPage('keuangan')" class="w-full text-left block py-2 hover:text-islamic-gold mobile-nav-link" data-target="keuangan">Keuangan</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HALAMAN BERANDA -->
+        <div id="beranda" class="page-content active-page">
+            <section class="hero-pattern text-white py-20 px-4 md:py-32 relative overflow-hidden">
+                <div class="container mx-auto flex flex-col md:flex-row items-center justify-between relative z-10">
+                    <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                        <div class="inline-block bg-islamic-gold text-islamic-green font-bold px-4 py-1 rounded-full text-sm mb-4 shadow-md">
+                            <i class="fa-solid fa-star mr-1"></i> Terakreditasi "A"
+                        </div>
+                        <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">Membentuk Generasi Cerdas, Islami, dan Berakhlak Mulia</h2>
+                        <p class="text-lg md:text-xl mb-8 text-gray-100">Selamat datang di *website* resmi Madrasah Ibtidaiyah Swasta (MIS) Al-Wathoniyyah 01. Kami berkomitmen memberikan pendidikan dasar terbaik berbasis nilai-nilai Islam ahlussunnah wal jama'ah.</p>
+                        <div class="space-x-4">
+                            <button onclick="showPage('profil')" class="bg-islamic-gold hover:bg-yellow-500 text-islamic-green font-bold py-3 px-6 rounded-full transition duration-300 shadow-lg inline-block">Pelajari Lebih Lanjut</button>
+                            <!-- Tombol diarahkan ke kontak di bagian footer -->
+                            <button onclick="document.getElementById('footer-contact').scrollIntoView({behavior: 'smooth'})" class="bg-transparent border-2 border-white hover:bg-white hover:text-islamic-green font-bold py-3 px-6 rounded-full transition duration-300 inline-block">Hubungi Kami</button>
+                        </div>
+                    </div>
+                    <div class="md:w-5/12">
+                        <img src="./PANO_20210217_100534_2.jpg" alt="Gedung MIS Al-Wathoniyyah 01" class="rounded-xl shadow-2xl border-4 border-white/20 w-full object-cover h-[300px] md:h-[400px]" onerror="this.src='https://placehold.co/600x400/0e7040/ffffff?text=Gedung+Madrasah'">
+                    </div>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-12 md:h-24 block fill-gray-50">
+                        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.26,198.39,101.4Z"></path>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- SEKSI BERITA TERBARU (SLIDER) -->
+            <section class="py-12 px-4 bg-gray-50 border-b border-gray-200 pt-20"> <!-- Menambahkan pt-20 agar tidak terlalu mepet karena hapus contact person banner -->
+                <div class="container mx-auto">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold text-islamic-green inline-block relative">
+                            Informasi & Prestasi Terbaru
+                            <span class="absolute bottom-0 left-1/4 w-1/2 h-1 bg-islamic-gold rounded-full -mb-2"></span>
+                        </h2>
+                        <p class="mt-4 text-gray-600">Kabar terkini, pengumuman, dan pencapaian membanggakan siswa-siswi kami.</p>
+                    </div>
+
+                    <div class="relative overflow-hidden w-full max-w-6xl mx-auto rounded-xl py-4">
+                        <div id="beranda-slider-track" class="flex transition-transform duration-1000 ease-in-out">
+                            
+                            <!-- Item 1: Prestasi -->
+                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
+                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-2 overflow-hidden h-full flex flex-col border border-gray-100">
+                                    <div class="relative">
+                                        <img src="./IMG_2519ed.jpg" alt="Prestasi MTQ" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x300/0e7040/ffffff?text=Prestasi+Siswa'">
+                                        <span class="absolute top-3 left-3 bg-islamic-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow">PRESTASI</span>
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-300 flex items-center justify-center">
+                                            <span class="bg-white text-islamic-green font-bold text-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 transform scale-75 group-hover:scale-100 shadow-lg">Baca Selengkapnya</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex-grow flex flex-col">
+                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Juara 1 MTQ Tingkat Kecamatan</h3>
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Siswa MIS Al-Wathoniyyah 01 berhasil meraih juara 1 pada lomba MTQ memperingati Hari Santri.</p>
+                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 22 Okt 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 2: Informasi -->
+                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
+                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-2 overflow-hidden h-full flex flex-col border border-gray-100">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/400x300/1b8a53/ffffff?text=Informasi+PPDB" alt="Info PPDB" class="w-full h-48 object-cover">
+                                        <span class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">INFORMASI</span>
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-300 flex items-center justify-center">
+                                            <span class="bg-white text-islamic-green font-bold text-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 transform scale-75 group-hover:scale-100 shadow-lg">Baca Selengkapnya</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex-grow flex flex-col">
+                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Pendaftaran Peserta Didik Baru (PPDB)</h3>
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Gelombang pertama penerimaan siswa baru tahun ajaran 2026/2027 telah dibuka.</p>
+                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 01 Nov 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 3: Kegiatan -->
+                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
+                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-2 overflow-hidden h-full flex flex-col border border-gray-100">
+                                    <div class="relative">
+                                        <img src="./IMG_20200226.jpg" alt="Kegiatan Manasik" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x300/0e7040/ffffff?text=Kegiatan'">
+                                        <span class="absolute top-3 left-3 bg-islamic-green-light text-white text-xs font-bold px-3 py-1 rounded-full shadow">KEGIATAN</span>
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-300 flex items-center justify-center">
+                                            <span class="bg-white text-islamic-green font-bold text-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 transform scale-75 group-hover:scale-100 shadow-lg">Baca Selengkapnya</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex-grow flex flex-col">
+                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Praktik Manasik Haji Siswa</h3>
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Seluruh siswa mengikuti simulasi manasik haji sebagai bagian dari kurikulum keagamaan.</p>
+                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 15 Sep 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 4: Prestasi -->
+                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
+                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-2 overflow-hidden h-full flex flex-col border border-gray-100">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/400x300/f5a623/ffffff?text=Prestasi+Pramuka" alt="Juara Pramuka" class="w-full h-48 object-cover">
+                                        <span class="absolute top-3 left-3 bg-islamic-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow">PRESTASI</span>
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-300 flex items-center justify-center">
+                                            <span class="bg-white text-islamic-green font-bold text-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 transform scale-75 group-hover:scale-100 shadow-lg">Baca Selengkapnya</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex-grow flex flex-col">
+                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Juara Umum Lomba Pramuka Siaga</h3>
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Regu pramuka siaga meraih juara umum dalam pesta siaga tingkat kwarran.</p>
+                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 10 Agu 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 5: Kegiatan -->
+                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
+                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-2 overflow-hidden h-full flex flex-col border border-gray-100">
+                                    <div class="relative">
+                                        <img src="./1751694224345.jpg" alt="Pelepasan Siswa" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x300/0e7040/ffffff?text=Acara+Sekolah'">
+                                        <span class="absolute top-3 left-3 bg-islamic-green-light text-white text-xs font-bold px-3 py-1 rounded-full shadow">KEGIATAN</span>
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-300 flex items-center justify-center">
+                                            <span class="bg-white text-islamic-green font-bold text-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 transform scale-75 group-hover:scale-100 shadow-lg">Baca Selengkapnya</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex-grow flex flex-col">
+                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Pelepasan & Wisuda Kelas VI</h3>
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Acara pelepasan siswa kelas VI berlangsung haru dan dipenuhi penampilan kreasi seni.</p>
+                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 20 Jun 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 6: Informasi -->
+                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
+                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-2 overflow-hidden h-full flex flex-col border border-gray-100">
+                                    <div class="relative">
+                                        <img src="https://placehold.co/400x300/6b7280/ffffff?text=Info+Akademik" alt="Jadwal Ujian" class="w-full h-48 object-cover">
+                                        <span class="absolute top-3 left-3 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">INFORMASI</span>
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-300 flex items-center justify-center">
+                                            <span class="bg-white text-islamic-green font-bold text-sm px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition duration-300 transform scale-75 group-hover:scale-100 shadow-lg">Baca Selengkapnya</span>
+                                        </div>
+                                    </div>
+                                    <div class="p-5 flex-grow flex flex-col">
+                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Jadwal Penilaian Akhir Semester</h3>
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Mohon dipersiapkan, jadwal PAS (Penilaian Akhir Semester) Ganjil akan dimulai minggu depan.</p>
+                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 05 Des 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <button onclick="showPage('berita')" class="text-islamic-green hover:text-islamic-gold font-bold text-sm uppercase tracking-wider transition bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 hover:shadow-md inline-flex items-center">
+                            Lihat Semua Berita <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- HALAMAN PROFIL -->
+        <div id="profil" class="page-content">
+            <section class="py-12 md:py-20 px-4 bg-gray-50">
+                <div class="container mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-islamic-green inline-block relative">
+                            Profil Madrasah
+                            <span class="absolute bottom-0 left-1/4 w-1/2 h-1 bg-islamic-gold rounded-full -mb-2"></span>
+                        </h2>
+                        <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Mengenal lebih dekat lingkungan pendidikan, visi, misi, dan tujuan kami untuk para peserta didik.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-islamic-green max-w-5xl mx-auto mb-12 flex flex-col md:flex-row gap-8 items-center">
+                        <div class="md:w-2/3">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4 flex items-center justify-center md:justify-start">
+                                <i class="fa-solid fa-book-open text-islamic-green mr-3"></i> Tentang Kami
+                            </h3>
+                            <p class="text-gray-600 mb-4 leading-relaxed text-justify">
+                                MIS Al-Wathoniyyah 01 merupakan lembaga pendidikan setingkat Sekolah Dasar yang memadukan kurikulum pendidikan nasional dengan pendidikan keagamaan (Islam). Kami mendidik anak-anak usia dasar untuk memiliki kompetensi akademik yang kuat sekaligus dasar keimanan dan akhlak yang kokoh.
+                            </p>
+                            <p class="text-gray-600 leading-relaxed text-justify">
+                                Berlokasi di tengah masyarakat, madrasah kami terus berbenah dan meningkatkan kualitas pembelajaran demi melahirkan lulusan yang siap menghadapi tantangan zaman namun tetap berpegang teguh pada nilai agama.
+                            </p>
+                        </div>
+                        <div class="md:w-1/3">
+                            <img src="./Plang%20Akreditasi.jpg" alt="Plang Akreditasi" class="rounded-lg shadow-md w-full object-cover" onerror="this.src='https://placehold.co/400x300/0e7040/ffffff?text=Plang+Madrasah'">
+                        </div>
+                    </div>
+
+                    <div class="max-w-5xl mx-auto space-y-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-md border-l-4 border-islamic-gold relative overflow-hidden">
+                            <div class="absolute -right-4 -top-4 opacity-10">
+                                <i class="fa-solid fa-eye text-9xl text-islamic-gold"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                                <span class="bg-islamic-gold/20 p-2 rounded-lg mr-3">
+                                    <i class="fa-solid fa-eye text-islamic-gold"></i>
+                                </span> 
+                                VISI
+                            </h4>
+                            <p class="text-xl md:text-2xl text-center text-islamic-green font-bold italic leading-relaxed py-4 px-2 md:px-12">
+                                “Terwujudnya generasi Qur’ani yang berakhlakul karimah, berprestasi, berwawasan luas, dan berdaya saing berlandaskan IMTAQ dan IPTEK.”
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-2xl shadow-md border-l-4 border-islamic-green">
+                            <h4 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                                <span class="bg-islamic-green/10 p-2 rounded-lg mr-3">
+                                    <i class="fa-solid fa-bullseye text-islamic-green"></i>
+                                </span> 
+                                MISI
+                            </h4>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-islamic-green text-white flex items-center justify-center font-bold mr-4 mt-1">1</div>
+                                    <p class="text-gray-600 text-justify leading-relaxed">Menyelenggarakan pendidikan yang berlandaskan Al-Qur’an dan As-Sunnah serta nilai-nilai Ahlussunnah wal Jama’ah An-Nahdliyah.</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-islamic-green text-white flex items-center justify-center font-bold mr-4 mt-1">2</div>
+                                    <p class="text-gray-600 text-justify leading-relaxed">Menanamkan kecintaan terhadap Al-Qur’an serta mengembangkan tradisi keilmuan dan adab pesantren.</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-islamic-green text-white flex items-center justify-center font-bold mr-4 mt-1">3</div>
+                                    <p class="text-gray-600 text-justify leading-relaxed">Menyelenggarakan pembelajaran yang aktif, kreatif, inovatif, menyenangkan, dan bermutu.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- HALAMAN AKADEMIK -->
+        <div id="akademik" class="page-content">
+            <section class="py-12 md:py-20 px-4 bg-white">
+                <div class="container mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-islamic-green inline-block relative">
+                            Program Akademik & Ekstrakurikuler
+                            <span class="absolute bottom-0 left-1/4 w-1/2 h-1 bg-islamic-gold rounded-full -mb-2"></span>
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                        <div class="text-center p-6 bg-gray-50 rounded-2xl shadow-sm border-b-4 border-islamic-green flex flex-col">
+                            <div class="w-16 h-16 mx-auto bg-islamic-green/10 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-flask text-2xl text-islamic-green"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-3">Kurikulum Nasional</h3>
+                            <p class="text-gray-600 text-sm flex-grow">Penerapan kurikulum merdeka untuk mata pelajaran umum seperti Matematika, IPA, IPS, dan Bahasa Indonesia.</p>
+                        </div>
+
+                        <div class="text-center p-6 bg-gray-50 rounded-2xl shadow-sm border-b-4 border-islamic-green flex flex-col">
+                            <div class="w-16 h-16 mx-auto bg-islamic-green/10 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-book-quran text-2xl text-islamic-green"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-3">Pendidikan Agama</h3>
+                            <p class="text-gray-600 text-sm flex-grow">Pembelajaran intensif Al-Qur'an Hadits, Aqidah Akhlak, Fiqih, SKI, dan Bahasa Arab.</p>
+                        </div>
+
+                        <div class="text-center p-6 bg-islamic-green text-white rounded-2xl shadow-md relative overflow-hidden flex flex-col">
+                            <div class="absolute -right-4 -top-4 opacity-10">
+                                <i class="fa-solid fa-star text-7xl text-islamic-gold"></i>
+                            </div>
+                            <div class="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-4 relative z-10">
+                                <i class="fa-solid fa-crown text-2xl text-islamic-gold"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-3 relative z-10 text-islamic-gold">Program Unggulan</h3>
+                            <p class="text-gray-100 text-sm relative z-10 flex-grow"><strong>Kelas Tahfidz</strong> khusus dan pembiasaan <strong>BTQ</strong> yang terintegrasi di setiap kelasnya.</p>
+                        </div>
+
+                        <div class="text-center p-6 bg-gray-50 rounded-2xl shadow-sm border-b-4 border-islamic-green flex flex-col">
+                            <div class="w-16 h-16 mx-auto bg-islamic-green/10 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-users text-2xl text-islamic-green"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-3">Ekstrakurikuler</h3>
+                            <div class="text-gray-600 text-sm text-left inline-block mx-auto flex-grow space-y-2">
+                                <div class="flex items-center"><i class="fa-solid fa-check text-islamic-green mr-2"></i> Pramuka & Drumband</div>
+                                <div class="flex items-center"><i class="fa-solid fa-check text-islamic-green mr-2"></i> Kaligrafi & MTQ</div>
+                                <div class="flex items-center"><i class="fa-solid fa-check text-islamic-green mr-2"></i> Rebana</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- HALAMAN KESISWAAN -->
+        <div id="kesiswaan" class="page-content">
+            <section class="py-12 md:py-20 px-4 bg-gray-50 h-full">
+                <div class="container mx-auto text-center">
+                    <div class="inline-block bg-islamic-green/10 p-4 rounded-full mb-4">
+                        <i class="fa-solid fa-users text-4xl text-islamic-green"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-islamic-green mb-4">Data Kesiswaan</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto mb-8">Pusat sistem informasi dan database terpadu untuk siswa-siswi MIS Al-Wathoniyyah 01.</p>
+                    <div class="bg-white p-8 rounded-2xl shadow border-2 border-dashed border-gray-300 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[300px]">
+                        <i class="fa-solid fa-server text-gray-300 text-5xl mb-4"></i>
+                        <p class="text-gray-500 font-medium text-lg">Modul Database Siswa</p>
+                        <p class="text-gray-400 text-sm mt-2">Sedang dalam tahap pengembangan untuk integrasi sistem informasi akademik.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- HALAMAN BERITA -->
+        <div id="berita" class="page-content">
+            <section class="py-12 md:py-20 px-4 bg-gray-100">
+                <div class="container mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-islamic-green inline-block relative">
+                            Berita & Kegiatan
+                            <span class="absolute bottom-0 left-1/4 w-1/2 h-1 bg-islamic-gold rounded-full -mb-2"></span>
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
+                            <img src="./IMG_20200226.jpg" alt="Kegiatan Manasik Haji" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x300/0e7040/ffffff?text=Kegiatan+1'">
+                            <div class="p-5 flex-grow">
+                                <div class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Kegiatan</div>
+                                <h3 class="text-lg font-bold mb-2">Praktik Manasik Haji Siswa</h3>
+                                <p class="text-gray-600 text-sm line-clamp-2">Siswa-siswi mengikuti kegiatan praktik manasik haji secara serentak di lingkungan madrasah.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
+                            <img src="./1751694224345.jpg" alt="Pelepasan Guru" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x300/0e7040/ffffff?text=Kegiatan+2'">
+                            <div class="p-5 flex-grow">
+                                <div class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Acara</div>
+                                <h3 class="text-lg font-bold mb-2">Pelepasan Kelas VI</h3>
+                                <p class="text-gray-600 text-sm line-clamp-2">Momen haru kebersamaan Dewan Guru dalam acara perpisahan kelulusan siswa-siswi kelas akhir.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
+                            <img src="./IMG_2519ed.jpg" alt="Prestasi Siswa" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x300/0e7040/ffffff?text=Kegiatan+3'">
+                            <div class="p-5 flex-grow">
+                                <div class="text-xs text-islamic-gold font-semibold uppercase tracking-wider mb-2">Prestasi</div>
+                                <h3 class="text-lg font-bold mb-2">Penghargaan Berprestasi</h3>
+                                <p class="text-gray-600 text-sm line-clamp-2">Pemberian piala kepada siswa-siswi yang telah meraih juara di tingkat kecamatan.</p>
+                            </div>
+                        </div>
+
+                         <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
+                            <img src="./IMG_2050ed.jpg" alt="Foto Bersama" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x300/0e7040/ffffff?text=Kegiatan+4'">
+                            <div class="p-5 flex-grow">
+                                <div class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Kebersamaan</div>
+                                <h3 class="text-lg font-bold mb-2">Keceriaan Siswa</h3>
+                                <p class="text-gray-600 text-sm line-clamp-2">Potret kebersamaan siswa-siswi bersama wali kelas dan para dewan guru madrasah.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- HALAMAN PPDB -->
+        <div id="ppdb" class="page-content">
+            <section class="py-12 md:py-24 px-4 bg-islamic-green text-white relative overflow-hidden h-full min-h-[60vh] flex items-center">
+                <div class="absolute top-0 right-0 opacity-10">
+                    <i class="fa-solid fa-graduation-cap text-[15rem]"></i>
+                </div>
+                <div class="container mx-auto text-center relative z-10">
+                    <div class="inline-block bg-white/20 p-4 rounded-full mb-4">
+                        <i class="fa-solid fa-user-plus text-4xl text-islamic-gold"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-islamic-gold mb-4">Penerimaan Peserta Didik Baru</h2>
+                    <p class="text-gray-100 max-w-2xl mx-auto mb-8">Portal pendaftaran siswa baru MIS Al-Wathoniyyah 01.</p>
+                    <div class="bg-white/10 p-8 rounded-2xl shadow-inner border border-white/20 max-w-3xl mx-auto flex flex-col items-center justify-center">
+                        <p class="text-gray-200 font-medium mb-4 text-lg"><i class="fa-solid fa-cogs mr-2"></i>Sistem PPDB Online Sedang Dipersiapkan</p>
+                        <p class="text-sm text-gray-300 mb-8">Pendaftaran dapat dilakukan dengan datang langsung ke madrasah.</p>
+                        <button onclick="window.open('https://wa.me/6287832085245', '_blank')" class="bg-islamic-gold hover:bg-yellow-500 text-islamic-green font-bold py-3 px-8 rounded-full transition shadow-lg">Hubungi Admin</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- HALAMAN KEUANGAN -->
+        <div id="keuangan" class="page-content">
+            <section class="py-12 md:py-20 px-4 bg-gray-50 h-full min-h-[60vh] flex items-center">
+                <div class="container mx-auto text-center">
+                    <div class="inline-block bg-islamic-green/10 p-4 rounded-full mb-4">
+                        <i class="fa-solid fa-wallet text-4xl text-islamic-green"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-islamic-green mb-4">Sistem Keuangan</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto mb-8">Modul terintegrasi untuk transaksi pembayaran administrasi siswa.</p>
+                    <div class="bg-white p-8 rounded-2xl shadow border-2 border-dashed border-gray-300 max-w-3xl mx-auto flex flex-col items-center justify-center min-h-[250px]">
+                        <i class="fa-solid fa-lock text-gray-300 text-5xl mb-4"></i>
+                        <p class="text-gray-500 font-medium text-lg">Portal Administrasi Keuangan</p>
+                        <p class="text-gray-400 text-sm mt-2">Membutuhkan autentikasi login (Dalam Pengembangan)</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-contact" class="bg-gray-800 text-white pt-10 pb-6 mt-auto">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8 border-b border-gray-700 pb-8 text-sm">
+                <div>
+                    <h3 class="text-lg font-bold mb-3 flex items-center text-islamic-gold">MIS Al-Wathoniyyah 01</h3>
+                    <p class="text-gray-400 mb-4">Mendidik generasi masa depan dengan pondasi ilmu agama yang kuat.</p>
+                    <!-- Alamat Ditambahkan Di Sini -->
+                    <div class="flex items-start text-gray-400 leading-relaxed">
+                        <i class="fa-solid fa-location-dot mt-1 mr-3 text-islamic-gold"></i>
+                        <p>Jl. KH. Abdurrosyid RT 09 RW 03<br>Tlogosari Wetan, Pedurungan<br>Kota Semarang 50196</p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-md font-semibold mb-3 text-white">Navigasi Cepat</h4>
+                    <ul class="space-y-1 text-gray-400">
+                        <li><button onclick="showPage('beranda')" class="hover:text-islamic-gold transition">Beranda</button></li>
+                        <li><button onclick="showPage('profil')" class="hover:text-islamic-gold transition">Profil</button></li>
+                        <li><button onclick="showPage('ppdb')" class="hover:text-islamic-gold transition">PPDB</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-md font-semibold mb-3 text-white">Jam Operasional</h4>
+                    <ul class="space-y-1 text-gray-400">
+                        <li class="flex justify-between"><span>Senin - Kamis:</span> <span>07.00 - 14.00</span></li>
+                        <li class="flex justify-between"><span>Jumat:</span> <span>07.00 - 11.30</span></li>
+                    </ul>
+                </div>
+                <!-- Contact Person -->
+                <div>
+                    <h4 class="text-md font-semibold mb-3 text-white">Contact Person</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li>
+                            <a href="https://wa.me/6287832085245" target="_blank" class="flex items-center hover:text-islamic-gold transition group">
+                                <i class="fa-brands fa-whatsapp text-[#25D366] text-xl mr-2 group-hover:scale-110 transition-transform"></i>
+                                <div>
+                                    <span class="block text-xs uppercase tracking-wider text-gray-500 group-hover:text-islamic-gold">Admin 1</span>
+                                    <span class="font-bold">0878-3208-5245</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/6281234567890" target="_blank" class="flex items-center hover:text-islamic-gold transition group">
+                                <i class="fa-brands fa-whatsapp text-[#25D366] text-xl mr-2 group-hover:scale-110 transition-transform"></i>
+                                <div>
+                                    <span class="block text-xs uppercase tracking-wider text-gray-500 group-hover:text-islamic-gold">Admin 2</span>
+                                    <span class="font-bold">0812-3456-7890</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-gray-500 text-xs">
+                <p>&copy; 2026 MIS Al-Wathoniyyah 01. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interaktif -->
+    <script>
+        // FUNGSI UTAMA UNTUK MENGGANTI HALAMAN
+        function showPage(pageId) {
+            // 1. Sembunyikan semua halaman
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active-page');
+            });
+
+            // 2. Tampilkan halaman yang dipilih
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active-page');
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll ke atas saat ganti halaman
+            }
+
+            // 3. Update status "active" pada navigasi Desktop
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                // Cek data-target, handle spesial untuk menu dropdown 'akademik' atau 'kesiswaan'
+                if (link.dataset.target && link.dataset.target.includes(pageId)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // 4. Update status teks pada navigasi Mobile & tutup menu
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileLinks.forEach(link => {
+                link.classList.remove('text-islamic-gold', 'font-bold');
+                if (link.dataset.target === pageId) {
+                    link.classList.add('text-islamic-gold', 'font-bold');
+                }
+            });
+            // Tutup menu mobile setelah klik
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Script untuk Mobile Menu Toggle (Buka/Tutup menu)
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Script untuk Accordion Sub-Menu Akademik di Mobile
+        const btnAkademik = document.getElementById('mobile-akademik-btn');
+        const menuAkademik = document.getElementById('mobile-akademik-menu');
+        const iconAkademik = document.getElementById('mobile-akademik-icon');
+
+        btnAkademik.addEventListener('click', () => {
+            menuAkademik.classList.toggle('hidden');
+            menuAkademik.classList.toggle('flex');
+            iconAkademik.classList.toggle('rotate-180');
+        });
+
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('beranda');
+            initSlider(); 
+        });
+
+        // FUNGSI SLIDER TERBARU YANG LEBIH PRESISI (MENGGUNAKAN PIXEL)
+        function initSlider() {
+            const track = document.getElementById('beranda-slider-track');
+            if (!track) return;
+            
+            const items = track.children;
+            const totalItems = items.length;
+            let currentSlide = 0;
+            let sliderInterval;
+
+            function moveSlider() {
+                // Tentukan jumlah kartu yang akan digeser (3 di PC, 1 di HP)
+                const isMobile = window.innerWidth < 768;
+                const step = isMobile ? 1 : 3; 
+                
+                currentSlide += step;
+                
+                // Jika gesekan melampaui jumlah kartu, kembali ke awal
+                if (currentSlide >= totalItems) {
+                    currentSlide = 0;
+                }
+                
+                // Ambil ukuran LEBAR ASLI (dalam Piksel) dari 1 kartu agar tidak terpotong
+                const itemWidth = items[0].getBoundingClientRect().width;
+                
+                // Geser track tepat sesuai ukuran piksel tersebut
+                track.style.transform = `translateX(-${currentSlide * itemWidth}px)`;
+            }
+
+            // Jalankan fungsi otomatis setiap 5 detik
+            sliderInterval = setInterval(moveSlider, 5000);
+            
+            // Jika user me-resize layar (dari HP ke Laptop atau sebaliknya), reset pergeseran agar layout tidak rusak
+            window.addEventListener('resize', () => {
+                currentSlide = 0;
+                track.style.transform = `translateX(0px)`;
+            });
+            
+            // Opsional: Hentikan gesekan saat mouse di-hover (diarahkan) ke slider
+            track.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+            track.addEventListener('mouseleave', () => {
+                sliderInterval = setInterval(moveSlider, 5000);
+            });
+        }
+    </script>
+</body>
+</html>
