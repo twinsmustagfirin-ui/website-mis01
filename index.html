@@ -61,7 +61,6 @@
     <header class="bg-islamic-green text-white sticky top-0 z-50 shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <!-- Logo & Nama Sekolah -->
-            <!-- 📌 MENGGANTI LOGO: Ubah src="..." di tag <img> di bawah ini -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('beranda')">
                 <div class="bg-white rounded-full p-1 h-12 w-12 flex items-center justify-center overflow-hidden border border-amber-300">
                     <img id="img-logo" src="./LOGOa1awtext1a 900x900.jpg" alt="Logo MIS Al-Wathoniyyah 01" class="h-full w-full object-contain" onerror="this.src='https://images.unsplash.com/photo-1577896851231-70ef18881754?w=150&auto=format&fit=crop&q=80'">
@@ -139,7 +138,6 @@
                         </div>
                     </div>
                     
-                    <!-- 📌 MENGGANTI GAMBAR GEDUNG UTAMA / HERO BANNER -->
                     <div class="md:w-5/12 w-full">
                         <div class="relative group rounded-xl overflow-hidden shadow-2xl border-4 border-white/20">
                             <img id="img-hero" src="./PANO_20210217_100534_2.jpg" alt="Gedung MIS Al-Wathoniyyah 01" class="w-full object-cover h-[300px] md:h-[380px] transition duration-500 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&auto=format&fit=crop&q=80'">
@@ -171,7 +169,6 @@
                         <div id="beranda-slider-track" class="flex transition-transform duration-700 ease-in-out">
                             
                             <!-- Card 1: Prestasi -->
-                            <!-- 📌 MENGGANTI GAMBAR BERITA 1 -->
                             <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
                                 <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-1 overflow-hidden h-full flex flex-col border border-gray-100">
                                     <div class="relative h-48 overflow-hidden bg-gray-200">
@@ -187,7 +184,6 @@
                             </div>
 
                             <!-- Card 2: Informasi -->
-                            <!-- 📌 MENGGANTI GAMBAR BERITA 2 -->
                             <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
                                 <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-1 overflow-hidden h-full flex flex-col border border-gray-100">
                                     <div class="relative h-48 overflow-hidden bg-gray-200">
@@ -203,7 +199,6 @@
                             </div>
 
                             <!-- Card 3: Kegiatan Manasik -->
-                            <!-- 📌 MENGGANTI GAMBAR BERITA 3 -->
                             <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
                                 <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-1 overflow-hidden h-full flex flex-col border border-gray-100">
                                     <div class="relative h-48 overflow-hidden bg-gray-200">
@@ -255,7 +250,6 @@
                             </p>
                         </div>
                         
-                        <!-- 📌 MENGGANTI GAMBAR PLANG AKREDITASI -->
                         <div class="md:w-1/3 w-full">
                             <div class="rounded-lg shadow-md overflow-hidden border border-gray-200">
                                 <img id="img-accreditation" src="./Plang%20Akreditasi.jpg" alt="Plang Akreditasi" class="w-full h-56 object-cover" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500&auto=format&fit=crop&q=80'">
@@ -475,67 +469,6 @@
         </div>
     </main>
 
-    <!-- TOOL PRATINJAU & KELOLA GAMBAR INTERAKTIF -->
-    <div class="fixed bottom-5 right-5 z-50">
-        <button id="open-img-tool-btn" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 border-2 border-white transition transform hover:scale-105">
-            <i class="fa-solid fa-image text-lg"></i>
-            <span class="text-xs md:text-sm">Uji Ganti Gambar</span>
-        </button>
-    </div>
-
-    <!-- Modal Kelola Gambar -->
-    <div id="img-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button id="close-img-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            
-            <div class="flex items-center gap-3 mb-4 text-islamic-green">
-                <i class="fa-solid fa-photo-film text-2xl"></i>
-                <h3 class="text-lg font-bold">Uji Coba Ganti Gambar</h3>
-            </div>
-            
-            <p class="text-xs text-gray-600 mb-4 leading-relaxed bg-amber-50 p-3 rounded-lg border border-amber-200">
-                <strong>Tips:</strong> Pilih lokasi gambar, lalu upload atau tempelkan link URL gambar untuk melihat pratinjau langsung di halaman ini.
-            </p>
-
-            <div class="space-y-4 text-sm">
-                <div>
-                    <label class="block font-semibold mb-1 text-gray-700">Pilih Gambar yang Ingin Diganti:</label>
-                    <select id="target-img-select" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-islamic-green outline-none">
-                        <option value="img-logo">Logo Sekolah (Header)</option>
-                        <option value="img-hero">Gedung Utamam (Beranda Hero)</option>
-                        <option value="img-accreditation">Plang Akreditasi (Profil)</option>
-                        <option value="img-news-1">Berita 1 (Prestasi MTQ)</option>
-                        <option value="img-news-2">Berita 2 (PPDB)</option>
-                        <option value="img-news-3">Berita 3 (Manasik Haji)</option>
-                        <option value="img-gallery-4">Galeri (Keceriaan Siswa)</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block font-semibold mb-1 text-gray-700">Opsi 1: Upload dari Perangkat (Lokal)</label>
-                    <input type="file" id="local-file-input" accept="image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-islamic-green file:text-white hover:file:bg-islamic-green-light">
-                </div>
-
-                <div class="relative flex py-1 items-center">
-                    <div class="flex-grow border-t border-gray-200"></div>
-                    <span class="flex-shrink mx-2 text-xs text-gray-400">atau</span>
-                    <div class="flex-grow border-t border-gray-200"></div>
-                </div>
-
-                <div>
-                    <label class="block font-semibold mb-1 text-gray-700">Opsi 2: Link URL Gambar Online</label>
-                    <input type="url" id="online-url-input" placeholder="https://example.com/foto.jpg" class="w-full border border-gray-300 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-islamic-green outline-none">
-                </div>
-
-                <button id="apply-img-btn" class="w-full bg-islamic-green hover:bg-islamic-green-light text-white font-bold py-2.5 rounded-lg transition shadow">
-                    Terapkan Gambar Baru
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer id="footer-contact" class="bg-[#1c2331] text-white pt-10 pb-6 mt-auto">
         <div class="container mx-auto px-4">
@@ -564,7 +497,7 @@
                         <li><button onclick="showPage('ppdb')" class="hover:text-islamic-gold transition">PPDB</button></li>
                     </ul>
 
-                    <!-- Tautan Sosial Media dengan Label (Instagram, YouTube, Facebook) -->
+                    <!-- Tautan Sosial Media dengan Label -->
                     <div class="flex flex-wrap gap-4 pt-2">
                         <a href="https://www.instagram.com/mial.wathoniyyah01bugen" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-gray-300 hover:text-white group">
                             <i class="fa-brands fa-instagram text-xl text-pink-500 group-hover:scale-110 transition-transform"></i>
@@ -627,7 +560,7 @@
                         </a>
                     </div>
 
-                    <!-- Tombol Ikon Lingkaran (Instagram, YouTube, Facebook) -->
+                    <!-- Tombol Ikon Lingkaran -->
                     <div class="flex space-x-3 pt-2">
                         <a href="https://www.instagram.com/mial.wathoniyyah01bugen" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-slate-700/60 flex items-center justify-center text-gray-300 hover:bg-pink-600 hover:text-white transition-all duration-300 shadow" title="Instagram">
                             <i class="fa-brands fa-instagram text-lg"></i>
@@ -711,7 +644,7 @@
 
             function moveSlider() {
                 const isMobile = window.innerWidth < 768;
-                const step = isMobile ? 1 : 1; 
+                const step = 1; 
                 
                 currentSlide += step;
                 if (currentSlide >= totalItems - (isMobile ? 0 : 2)) {
@@ -735,44 +668,10 @@
             });
         }
 
-        // LOGIKA KELOLA & PRATINJAU GAMBAR INTERAKTIF
-        const imgModal = document.getElementById('img-modal');
-        const openImgBtn = document.getElementById('open-img-tool-btn');
-        const closeImgBtn = document.getElementById('close-img-modal');
-        const applyImgBtn = document.getElementById('apply-img-btn');
-        const targetImgSelect = document.getElementById('target-img-select');
-        const localFileInput = document.getElementById('local-file-input');
-        const onlineUrlInput = document.getElementById('online-url-input');
-
-        openImgBtn.addEventListener('click', () => imgModal.classList.remove('hidden'));
-        closeImgBtn.addEventListener('click', () => imgModal.classList.add('hidden'));
-
-        applyImgBtn.addEventListener('click', () => {
-            const targetId = targetImgSelect.value;
-            const targetImg = document.getElementById(targetId);
-
-            if (!targetImg) return;
-
-            // Jika mengunggah file dari komputer
-            if (localFileInput.files && localFileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    targetImg.src = e.target.result;
-                    imgModal.classList.add('hidden');
-                };
-                reader.readAsDataURL(localFileInput.files[0]);
-            } 
-            // Jika memasukkan URL online
-            else if (onlineUrlInput.value.trim() !== '') {
-                targetImg.src = onlineUrlInput.value.trim();
-                imgModal.classList.add('hidden');
-            }
-        });
-
-        // Inisialisasi awal
+        // Inisialisasi awal saat dokumen siap
         document.addEventListener('DOMContentLoaded', () => {
             showPage('beranda');
-            initSlider(); 
+            initSlider();
         });
     </script>
 </body>
