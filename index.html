@@ -472,7 +472,9 @@
     <!-- Footer -->
     <footer id="footer-contact" class="bg-[#1c2331] text-white pt-10 pb-6 mt-auto">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-slate-700/60 pb-8 text-sm">
+            
+            <!-- Grid Utama (4 Kolom Atas) -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6 text-sm">
                 
                 <!-- Kolom 1: Identitas & Alamat -->
                 <div>
@@ -488,59 +490,32 @@
                     </div>
                 </div>
 
-                <!-- Kolom 2: Navigasi Cepat & Sosial Media Inline -->
+                <!-- Kolom 2: Navigasi Cepat -->
                 <div>
                     <h4 class="text-md font-semibold mb-4 text-white">Navigasi Cepat</h4>
-                    <ul class="space-y-2 text-gray-300 text-sm mb-6">
+                    <ul class="space-y-2 text-gray-300 text-sm">
                         <li><button onclick="showPage('beranda')" class="hover:text-islamic-gold transition">Beranda</button></li>
                         <li><button onclick="showPage('profil')" class="hover:text-islamic-gold transition">Profil</button></li>
                         <li><button onclick="showPage('ppdb')" class="hover:text-islamic-gold transition">PPDB</button></li>
                     </ul>
-
-                    <!-- Tautan Sosial Media dengan Label -->
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <a href="https://www.instagram.com/mial.wathoniyyah01bugen" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-gray-300 hover:text-white group">
-                            <i class="fa-brands fa-instagram text-xl text-pink-500 group-hover:scale-110 transition-transform"></i>
-                            <div>
-                                <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">INSTAGRAM</span>
-                                <span class="text-xs font-medium text-gray-200">@mial.wathoniyyah01bugen</span>
-                            </div>
-                        </a>
-
-                        <a href="https://www.youtube.com/@MIAlWathoniyyah01" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-gray-300 hover:text-white group">
-                            <i class="fa-brands fa-youtube text-xl text-red-500 group-hover:scale-110 transition-transform"></i>
-                            <div>
-                                <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">YOUTUBE</span>
-                                <span class="text-xs font-medium text-gray-200">@MIAlWathoniyyah01</span>
-                            </div>
-                        </a>
-
-                        <a href="https://www.facebook.com/profile.php?id=61556810231669" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-gray-300 hover:text-white group">
-                            <i class="fa-brands fa-facebook text-xl text-blue-500 group-hover:scale-110 transition-transform"></i>
-                            <div>
-                                <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">FACEBOOK</span>
-                                <span class="text-xs font-medium text-gray-200">MIS Al-Wathoniyyah 01 Bugen</span>
-                            </div>
-                        </a>
-                    </div>
                 </div>
 
                 <!-- Kolom 3: Jam Operasional -->
                 <div>
                     <h4 class="text-md font-semibold mb-4 text-white">Jam Operasional</h4>
-                    <div class="space-y-2 text-gray-300 text-sm pr-4">
-                        <div class="flex justify-between items-center">
-                            <span>Senin - Kamis:</span>
+                    <div class="space-y-2 text-gray-300 text-sm">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-28 flex-shrink-0">Senin - Kamis:</span>
                             <span class="font-mono text-gray-200">07.00 - 14.00</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span>Jumat:</span>
+                        <div class="flex items-center space-x-3">
+                            <span class="w-28 flex-shrink-0">Jumat:</span>
                             <span class="font-mono text-gray-200">07.00 - 11.30</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kolom 4: Kontak Admin & Tombol Ikon Bulat -->
+                <!-- Kolom 4: Kontak Admin & Tombol Ikon Lingkaran -->
                 <div>
                     <h4 class="text-md font-semibold mb-4 text-white">Kontak & Media Sosial</h4>
                     <div class="space-y-3 mb-6">
@@ -575,7 +550,47 @@
                 </div>
 
             </div>
-            <div class="text-center text-gray-400 text-xs">
+
+            <!-- Baris Sosial Media dengan Label (Horisontal di Bawah Kolom 2, 3, 4) -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pt-2">
+                <div class="hidden md:block"></div> <!-- Spasi kosong di bawah Kolom 1 -->
+
+                <!-- Facebook (Sejajar di bawah Navigasi Cepat) -->
+                <div>
+                    <a href="https://www.facebook.com/profile.php?id=61556810231669" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 text-gray-300 hover:text-white group">
+                        <i class="fa-brands fa-facebook text-2xl text-blue-500 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">FACEBOOK</span>
+                            <span class="text-xs font-medium text-gray-200">MIS Al-Wathoniyyah 01 Bugen</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- YouTube (Sejajar di bawah Jam Operasional) -->
+                <div>
+                    <a href="https://www.youtube.com/@MIAlWathoniyyah01" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 text-gray-300 hover:text-white group">
+                        <i class="fa-brands fa-youtube text-2xl text-red-500 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">YOUTUBE</span>
+                            <span class="text-xs font-medium text-gray-200">@MIAlWathoniyyah01</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Instagram (Sejajar di bawah Kontak) -->
+                <div>
+                    <a href="https://www.instagram.com/mial.wathoniyyah01bugen" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 text-gray-300 hover:text-white group">
+                        <i class="fa-brands fa-instagram text-2xl text-pink-500 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">INSTAGRAM</span>
+                            <span class="text-xs font-medium text-gray-200">@mial.wathoniyyah01bugen</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Copyright Line -->
+            <div class="border-t border-slate-700/60 pt-6 text-center text-gray-400 text-xs">
                 <p>&copy; 2026 MIS Al-Wathoniyyah 01. All rights reserved.</p>
             </div>
         </div>
