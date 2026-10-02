@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIS AL-WATHONIYYAH 01 | Cerdas, Islami, Berprestasi</title>
     <!-- Favicon / Logo pada Tab Browser -->
-    <link rel="icon" type="image/jpeg" href="./Logo Saja.jpg">
-    <link rel="shortcut icon" type="image/jpeg" href="./Logo Saja.jpg">
-    <link rel="apple-touch-icon" href="./Logo Saja.jpg">
+    <link rel="icon" type="image/jpeg" href="./LOGOa1awtext1a 900x900.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="./LOGOa1awtext1a 900x900.jpg">
+    <link rel="apple-touch-icon" href="./LOGOa1awtext1a 900x900.jpg">
     <!-- Memuat Tailwind CSS untuk styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Memuat Font Awesome untuk ikon -->
@@ -58,12 +58,12 @@
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Navbar Header -->
-    <header class="bg-islamic-green text-white sticky top-0 z-50 shadow-md">
+    <header class="bg-islamic-green text-white sticky top-0 z-40 shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <!-- Logo & Nama Sekolah -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('beranda')">
                 <div class="bg-white rounded-full p-1 h-12 w-12 flex items-center justify-center overflow-hidden border border-amber-300">
-                    <img id="img-logo" src="./Logo Saja.jpg" alt="Logo MIS Al-Wathoniyyah 01" class="h-full w-full object-contain" onerror="this.src='https://images.unsplash.com/photo-1577896851231-70ef18881754?w=150&auto=format&fit=crop&q=80'">
+                    <img id="img-logo" src="./LOGOa1awtext1a 900x900.jpg" alt="Logo MIS Al-Wathoniyyah 01" class="h-full w-full object-contain" onerror="this.src='https://images.unsplash.com/photo-1577896851231-70ef18881754?w=150&auto=format&fit=crop&q=80'">
                 </div>
                 <div>
                     <h1 class="text-lg md:text-xl font-bold leading-tight">MIS AL-WATHONIYYAH 01</h1>
@@ -96,6 +96,11 @@
                 <button onclick="showPage('berita')" class="nav-link hover:text-islamic-gold transition font-medium" data-target="berita">Berita</button>
                 <button onclick="showPage('ppdb')" class="nav-link hover:text-islamic-gold transition font-bold text-islamic-gold" data-target="ppdb">PPDB</button>
                 <button onclick="showPage('keuangan')" class="nav-link hover:text-islamic-gold transition font-medium" data-target="keuangan">Keuangan</button>
+                
+                <!-- Tombol Kelola Admin (Hanya tampil jika login sebagai Admin) -->
+                <button id="admin-nav-btn" onclick="openAdminModal()" class="admin-only hidden bg-islamic-gold text-islamic-green hover:bg-amber-400 px-3 py-1.5 rounded-lg text-xs font-bold transition items-center shadow">
+                    <i class="fa-solid fa-gear mr-1.5"></i> Admin
+                </button>
             </nav>
         </div>
 
@@ -117,7 +122,8 @@
             
             <button onclick="showPage('berita')" class="w-full text-left block py-2 border-b border-islamic-green hover:text-islamic-gold mobile-nav-link" data-target="berita">Berita</button>
             <button onclick="showPage('ppdb')" class="w-full text-left block py-2 border-b border-islamic-green text-islamic-gold font-bold mobile-nav-link" data-target="ppdb">PPDB</button>
-            <button onclick="showPage('keuangan')" class="w-full text-left block py-2 hover:text-islamic-gold mobile-nav-link" data-target="keuangan">Keuangan</button>
+            <button onclick="showPage('keuangan')" class="w-full text-left block py-2 border-b border-islamic-green hover:text-islamic-gold mobile-nav-link" data-target="keuangan">Keuangan</button>
+            <button id="admin-mobile-nav-btn" onclick="openAdminModal()" class="admin-only hidden w-full text-left block py-2 text-islamic-gold font-bold"><i class="fa-solid fa-gear mr-2"></i> Panel Kelola Admin</button>
         </div>
     </header>
 
@@ -154,75 +160,36 @@
                 </div>
             </section>
 
-            <!-- SEKSI BERITA TERBARU (SLIDER) -->
+            <!-- SEKSI BERITA TERBARU (SLIDER DINAMIS) -->
             <section class="py-12 px-4 bg-gray-50 border-b border-gray-200">
                 <div class="container mx-auto">
                     <div class="text-center mb-10">
-                        <h2 class="text-3xl font-bold text-islamic-green inline-block relative">
-                            Informasi & Prestasi Terbaru
-                            <span class="absolute bottom-0 left-1/4 w-1/2 h-1 bg-islamic-gold rounded-full -mb-2"></span>
-                        </h2>
+                        <div class="flex items-center justify-center gap-2 mb-2">
+                            <h2 class="text-3xl font-bold text-islamic-green inline-block relative">
+                                Informasi & Prestasi Terbaru
+                                <span class="absolute bottom-0 left-1/4 w-1/2 h-1 bg-islamic-gold rounded-full -mb-2"></span>
+                            </h2>
+                        </div>
                         <p class="mt-4 text-gray-600">Kabar terkini, pengumuman, dan pencapaian membanggakan siswa-siswi kami.</p>
                     </div>
 
                     <div class="relative overflow-hidden w-full max-w-6xl mx-auto rounded-xl py-4">
                         <div id="beranda-slider-track" class="flex transition-transform duration-700 ease-in-out">
-                            
-                            <!-- Card 1: Prestasi -->
-                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
-                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-1 overflow-hidden h-full flex flex-col border border-gray-100">
-                                    <div class="relative h-48 overflow-hidden bg-gray-200">
-                                        <img id="img-news-1" src="./IMG_2519ed.jpg" alt="Prestasi MTQ" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&auto=format&fit=crop&q=80'">
-                                        <span class="absolute top-3 left-3 bg-islamic-gold text-white text-xs font-bold px-3 py-1 rounded-full shadow">PRESTASI</span>
-                                    </div>
-                                    <div class="p-5 flex-grow flex flex-col">
-                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Juara 1 MTQ Tingkat Kecamatan</h3>
-                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Siswa MIS Al-Wathoniyyah 01 berhasil meraih juara 1 pada lomba MTQ memperingati Hari Santri.</p>
-                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 22 Okt 2025</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 2: Informasi -->
-                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
-                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-1 overflow-hidden h-full flex flex-col border border-gray-100">
-                                    <div class="relative h-48 overflow-hidden bg-gray-200">
-                                        <img id="img-news-2" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&auto=format&fit=crop&q=80" alt="Info PPDB" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                                        <span class="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">INFORMASI</span>
-                                    </div>
-                                    <div class="p-5 flex-grow flex flex-col">
-                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Pendaftaran Peserta Didik Baru (PPDB)</h3>
-                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Gelombang pertama penerimaan siswa baru tahun ajaran 2026/2027 telah dibuka.</p>
-                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 01 Nov 2025</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 3: Kegiatan Manasik -->
-                            <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
-                                <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-1 overflow-hidden h-full flex flex-col border border-gray-100">
-                                    <div class="relative h-48 overflow-hidden bg-gray-200">
-                                        <img id="img-news-3" src="./IMG_20200226.jpg" alt="Kegiatan Manasik" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&auto=format&fit=crop&q=80'">
-                                        <span class="absolute top-3 left-3 bg-islamic-green-light text-white text-xs font-bold px-3 py-1 rounded-full shadow">KEGIATAN</span>
-                                    </div>
-                                    <div class="p-5 flex-grow flex flex-col">
-                                        <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors">Praktik Manasik Haji Siswa</h3>
-                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Seluruh siswa mengikuti simulasi manasik haji sebagai bagian dari kurikulum keagamaan.</p>
-                                        <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> 15 Sep 2025</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    
-                    <div class="text-center mt-8">
-                        <button onclick="showPage('berita')" class="text-islamic-green hover:text-islamic-gold font-bold text-sm uppercase tracking-wider transition bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 hover:shadow-md inline-flex items-center">
-                            Lihat Semua Berita <i class="fa-solid fa-arrow-right ml-2"></i>
-                        </button>
+                        <!-- Diisi secara dinamis melalui JavaScript -->
                     </div>
                 </div>
-            </section>
+                
+                <div class="text-center mt-8 flex justify-center gap-4 flex-wrap">
+                    <button onclick="showPage('berita')" class="text-islamic-green hover:text-islamic-gold font-bold text-sm uppercase tracking-wider transition bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 hover:shadow-md inline-flex items-center">
+                        Lihat Semua Berita <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                    <!-- Tombol Tambah Informasi (Hanya tampil jika login sebagai Admin) -->
+                    <button id="admin-add-news-btn" onclick="openAdminModal()" class="admin-only hidden bg-islamic-green hover:bg-islamic-green-light text-white font-bold text-sm uppercase tracking-wider transition px-6 py-3 rounded-full shadow-sm inline-flex items-center">
+                        <i class="fa-solid fa-plus-circle mr-2"></i> Tambah Informasi / Prestasi
+                    </button>
+                </div>
+            </div>
+        </section>
         </div>
 
         <!-- HALAMAN PROFIL -->
@@ -373,7 +340,7 @@
             </section>
         </div>
 
-        <!-- HALAMAN BERITA (GALERI KEGIATAN) -->
+        <!-- HALAMAN BERITA (GALERI KEGIATAN DINAMIS) -->
         <div id="berita" class="page-content">
             <section class="py-12 md:py-20 px-4 bg-gray-100">
                 <div class="container mx-auto">
@@ -384,46 +351,8 @@
                         </h2>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                        <!-- Item 1 -->
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
-                            <img id="img-gallery-1" src="./IMG_20200226.jpg" alt="Kegiatan Manasik Haji" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&auto=format&fit=crop&q=80'">
-                            <div class="p-5 flex-grow">
-                                <div class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Kegiatan</div>
-                                <h3 class="text-lg font-bold mb-2">Praktik Manasik Haji Siswa</h3>
-                                <p class="text-gray-600 text-sm line-clamp-2">Siswa-siswi mengikuti kegiatan praktik manasik haji secara serentak di lingkungan madrasah.</p>
-                            </div>
-                        </div>
-
-                        <!-- Item 2 -->
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
-                            <img id="img-gallery-2" src="./1751694224345.jpg" alt="Pelepasan Guru" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&auto=format&fit=crop&q=80'">
-                            <div class="p-5 flex-grow">
-                                <div class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Acara</div>
-                                <h3 class="text-lg font-bold mb-2">Pelepasan Kelas VI</h3>
-                                <p class="text-gray-600 text-sm line-clamp-2">Momen haru kebersamaan Dewan Guru dalam acara perpisahan kelulusan siswa-siswi kelas akhir.</p>
-                            </div>
-                        </div>
-
-                        <!-- Item 3 -->
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
-                            <img id="img-gallery-3" src="./IMG_2519ed.jpg" alt="Prestasi Siswa" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&auto=format&fit=crop&q=80'">
-                            <div class="p-5 flex-grow">
-                                <div class="text-xs text-islamic-gold font-semibold uppercase tracking-wider mb-2">Prestasi</div>
-                                <h3 class="text-lg font-bold mb-2">Penghargaan Berprestasi</h3>
-                                <p class="text-gray-600 text-sm line-clamp-2">Pemberian piala kepada siswa-siswi yang telah meraih juara di tingkat kecamatan.</p>
-                            </div>
-                        </div>
-
-                        <!-- Item 4 -->
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
-                            <img id="img-gallery-4" src="./IMG_2050ed.jpg" alt="Foto Bersama" class="w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1577896851231-70ef18881754?w=500&auto=format&fit=crop&q=80'">
-                            <div class="p-5 flex-grow">
-                                <div class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Kebersamaan</div>
-                                <h3 class="text-lg font-bold mb-2">Keceriaan Siswa</h3>
-                                <p class="text-gray-600 text-sm line-clamp-2">Potret kebersamaan siswa-siswi bersama wali kelas dan para dewan guru madrasah.</p>
-                            </div>
-                        </div>
+                    <div id="berita-gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                        <!-- Diisi secara dinamis melalui JavaScript -->
                     </div>
                 </div>
             </section>
@@ -469,12 +398,74 @@
         </div>
     </main>
 
+    <!-- MODAL / DRAWER ADMIN UNTUK MENGELOLA INFORMASI & PRESTASI -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
+            <!-- Modal Header -->
+            <div class="bg-islamic-green text-white px-6 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-pen-to-square text-xl text-islamic-gold"></i>
+                    <h3 class="font-bold text-lg">Kelola Informasi & Prestasi Terbaru</h3>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="logoutAdmin()" class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1.5 rounded-lg font-bold transition flex items-center shadow">
+                        <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar
+                    </button>
+                    <button onclick="closeAdminModal()" class="text-gray-200 hover:text-white text-2xl font-bold leading-none">&times;</button>
+                </div>
+            </div>
+                <!-- Opsi Ekspor/Impor Kode -->
+                <div class="border-t pt-4">
+                    <h5 class="text-xs font-bold text-gray-600 mb-2 uppercase">Manajemen Data Eksternal</h5>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="exportDataJSON()" class="px-3 py-1.5 bg-blue-600 text-white rounded text-xs font-semibold hover:bg-blue-700 transition">
+                            <i class="fa-solid fa-download mr-1"></i> Ekspor JSON
+                        </button>
+                        <button onclick="importDataJSON()" class="px-3 py-1.5 bg-gray-700 text-white rounded text-xs font-semibold hover:bg-gray-800 transition">
+                            <i class="fa-solid fa-upload mr-1"></i> Impor JSON
+                        </button>
+                        <button onclick="resetToDefaultData()" class="px-3 py-1.5 bg-red-600 text-white rounded text-xs font-semibold hover:bg-red-700 transition ml-auto">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> Reset ke Default
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL LOGIN ADMIN -->
+    <div id="login-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden p-6 relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-islamic-green/10 text-islamic-green rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-solid fa-user-shield text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800">Login Admin</h3>
+                <p class="text-xs text-gray-500 mt-1">Masukkan kata sandi untuk mengakses panel kelola website.</p>
+            </div>
+
+            <form onsubmit="submitAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Kata Sandi Admin</label>
+                    <input type="password" id="admin-password-input" required placeholder="Masukkan kata sandi..." class="w-full px-4 py-2.5 border rounded-xl text-sm focus:ring-2 focus:ring-islamic-green outline-none">
+                    <p id="login-error-msg" class="text-xs text-red-600 font-semibold mt-1.5 hidden"><i class="fa-solid fa-circle-exclamation mr-1"></i> Kata sandi salah! Silakan coba lagi.</p>
+                    <p class="text-[11px] text-amber-700 bg-amber-50 p-2 rounded-lg mt-2 border border-amber-200">
+                        <i class="fa-solid fa-lightbulb mr-1 text-amber-500"></i> <strong>Sandi default:</strong> <code>admin123</code> atau <code>admin</code>
+                    </p>
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeLoginModal()" class="w-1/2 py-2.5 bg-gray-200 text-gray-700 rounded-xl font-bold text-xs hover:bg-gray-300 transition">Batal</button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-islamic-green text-white rounded-xl font-bold text-xs hover:bg-islamic-green-light transition shadow">Masuk Admin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer id="footer-contact" class="bg-[#1c2331] text-white pt-10 pb-6 mt-auto">
         <div class="container mx-auto px-4">
-            
-            <!-- Grid Utama (4 Kolom Atas) -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6 text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-slate-700/60 pb-8 text-sm">
                 
                 <!-- Kolom 1: Identitas & Alamat -->
                 <div>
@@ -490,32 +481,59 @@
                     </div>
                 </div>
 
-                <!-- Kolom 2: Navigasi Cepat -->
+                <!-- Kolom 2: Navigasi Cepat & Sosial Media Inline -->
                 <div>
                     <h4 class="text-md font-semibold mb-4 text-white">Navigasi Cepat</h4>
-                    <ul class="space-y-2 text-gray-300 text-sm">
+                    <ul class="space-y-2 text-gray-300 text-sm mb-6">
                         <li><button onclick="showPage('beranda')" class="hover:text-islamic-gold transition">Beranda</button></li>
                         <li><button onclick="showPage('profil')" class="hover:text-islamic-gold transition">Profil</button></li>
                         <li><button onclick="showPage('ppdb')" class="hover:text-islamic-gold transition">PPDB</button></li>
                     </ul>
+
+                    <!-- Tautan Sosial Media dengan Label -->
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="https://www.instagram.com/mial.wathoniyyah01bugen" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-gray-300 hover:text-white group">
+                            <i class="fa-brands fa-instagram text-xl text-pink-500 group-hover:scale-110 transition-transform"></i>
+                            <div>
+                                <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">INSTAGRAM</span>
+                                <span class="text-xs font-medium text-gray-200">@mial.wathoniyyah01bugen</span>
+                            </div>
+                        </a>
+
+                        <a href="https://www.youtube.com/@MIAlWathoniyyah01" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-gray-300 hover:text-white group">
+                            <i class="fa-brands fa-youtube text-xl text-red-500 group-hover:scale-110 transition-transform"></i>
+                            <div>
+                                <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">YOUTUBE</span>
+                                <span class="text-xs font-medium text-gray-200">@MIAlWathoniyyah01</span>
+                            </div>
+                        </a>
+
+                        <a href="https://www.facebook.com/profile.php?id=61556810231669" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-gray-300 hover:text-white group">
+                            <i class="fa-brands fa-facebook text-xl text-blue-500 group-hover:scale-110 transition-transform"></i>
+                            <div>
+                                <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">FACEBOOK</span>
+                                <span class="text-xs font-medium text-gray-200">MIS Al-Wathoniyyah 01 Bugen</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Kolom 3: Jam Operasional -->
                 <div>
                     <h4 class="text-md font-semibold mb-4 text-white">Jam Operasional</h4>
-                    <div class="space-y-2 text-gray-300 text-sm">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-28 flex-shrink-0">Senin - Kamis:</span>
+                    <div class="space-y-2 text-gray-300 text-sm pr-4">
+                        <div class="flex justify-between items-center">
+                            <span>Senin - Kamis:</span>
                             <span class="font-mono text-gray-200">07.00 - 14.00</span>
                         </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="w-28 flex-shrink-0">Jumat:</span>
+                        <div class="flex justify-between items-center">
+                            <span>Jumat:</span>
                             <span class="font-mono text-gray-200">07.00 - 11.30</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kolom 4: Kontak Admin & Tombol Ikon Lingkaran -->
+                <!-- Kolom 4: Kontak Admin & Tombol Ikon Bulat -->
                 <div>
                     <h4 class="text-md font-semibold mb-4 text-white">Kontak & Media Sosial</h4>
                     <div class="space-y-3 mb-6">
@@ -550,54 +568,398 @@
                 </div>
 
             </div>
-
-            <!-- Baris Sosial Media dengan Label (Horisontal di Bawah Kolom 2, 3, 4) -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pt-2">
-                <div class="hidden md:block"></div> <!-- Spasi kosong di bawah Kolom 1 -->
-
-                <!-- Facebook (Sejajar di bawah Navigasi Cepat) -->
-                <div>
-                    <a href="https://www.facebook.com/profile.php?id=61556810231669" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 text-gray-300 hover:text-white group">
-                        <i class="fa-brands fa-facebook text-2xl text-blue-500 group-hover:scale-110 transition-transform"></i>
-                        <div>
-                            <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">FACEBOOK</span>
-                            <span class="text-xs font-medium text-gray-200">MIS Al-Wathoniyyah 01 Bugen</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- YouTube (Sejajar di bawah Jam Operasional) -->
-                <div>
-                    <a href="https://www.youtube.com/@MIAlWathoniyyah01" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 text-gray-300 hover:text-white group">
-                        <i class="fa-brands fa-youtube text-2xl text-red-500 group-hover:scale-110 transition-transform"></i>
-                        <div>
-                            <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">YOUTUBE</span>
-                            <span class="text-xs font-medium text-gray-200">@MIAlWathoniyyah01</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Instagram (Sejajar di bawah Kontak) -->
-                <div>
-                    <a href="https://www.instagram.com/mial.wathoniyyah01bugen" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 text-gray-300 hover:text-white group">
-                        <i class="fa-brands fa-instagram text-2xl text-pink-500 group-hover:scale-110 transition-transform"></i>
-                        <div>
-                            <span class="block text-[10px] tracking-wider uppercase text-gray-400 font-semibold leading-none">INSTAGRAM</span>
-                            <span class="text-xs font-medium text-gray-200">@mial.wathoniyyah01bugen</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Copyright Line -->
-            <div class="border-t border-slate-700/60 pt-6 text-center text-gray-400 text-xs">
+            <div class="text-center text-gray-400 text-xs flex justify-between items-center max-w-6xl mx-auto px-4">
                 <p>&copy; 2026 MIS Al-Wathoniyyah 01. All rights reserved.</p>
+                <!-- Tautan Login Admin Rahasia (Hanya tampil jika Admin sudah Login) -->
+                <button id="footer-admin-btn" onclick="handleFooterAdminClick()" class="text-gray-500 hover:text-islamic-gold transition text-xs hidden">
+                    <i class="fa-solid fa-lock mr-1"></i> Admin Login
+                </button>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript Interaktif -->
     <script>
+        // MANAJEMEN STATUS LOGIN ADMIN
+        let isAdmin = false;
+
+        function checkAdminAuth() {
+            isAdmin = sessionStorage.getItem('mis_admin_logged_in') === 'true';
+            updateAuthUI();
+        }
+
+        function updateAuthUI() {
+            const adminElements = document.querySelectorAll('.admin-only');
+            adminElements.forEach(el => {
+                if (isAdmin) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+
+            const footerLoginBtn = document.getElementById('footer-admin-btn');
+            if (footerLoginBtn) {
+                if (isAdmin) {
+                    footerLoginBtn.classList.remove('hidden');
+                    footerLoginBtn.innerHTML = `<i class="fa-solid fa-user-check mr-1 text-emerald-400"></i> Mode Admin Aktif (Keluar)`;
+                    footerLoginBtn.className = "text-amber-400 font-bold hover:text-white transition text-xs";
+                } else {
+                    // Sembunyikan tautan login dari publik
+                    footerLoginBtn.classList.add('hidden');
+                }
+            }
+        }
+
+        // FUNGSI MEMERIKSA ALAMAT URL UNTUK LOGIN ADMIN RAHASIA
+        function checkSecretUrlLogin() {
+            const path = window.location.pathname.toLowerCase();
+            const hash = window.location.hash.toLowerCase();
+            const search = window.location.search.toLowerCase();
+
+            // Memeriksa jika URL mengandung 'admin-login', 'admin', '#admin-login', atau '?admin'
+            if (path.includes('admin-login') || path.includes('admin') || hash === '#admin-login' || search.includes('admin')) {
+                if (!isAdmin) {
+                    openLoginModal();
+                }
+            }
+        }
+
+        // PINTU RAHASIA: PINDAHAN KEYBOARD SHORTCUT (Ctrl + Shift + A)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+                e.preventDefault();
+                if (isAdmin) {
+                    openAdminModal();
+                } else {
+                    openLoginModal();
+                }
+            }
+        });
+
+        function handleFooterAdminClick() {
+            if (isAdmin) {
+                openAdminModal();
+            } else {
+                openLoginModal();
+            }
+        }
+
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+            document.getElementById('admin-password-input').value = '';
+            document.getElementById('login-error-msg').classList.add('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+        }
+
+        function submitAdminLogin(e) {
+            if (e) e.preventDefault();
+            const password = document.getElementById('admin-password-input').value;
+            if (password === 'admin123' || password === 'admin') {
+                isAdmin = true;
+                sessionStorage.setItem('mis_admin_logged_in', 'true');
+                updateAuthUI();
+                closeLoginModal();
+                openAdminModal();
+            } else {
+                document.getElementById('login-error-msg').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            sessionStorage.removeItem('mis_admin_logged_in');
+            updateAuthUI();
+            closeAdminModal();
+        }
+
+        // DATA DEFAULT INFORMASI & PRESTASI
+        const defaultNewsData = [
+            {
+                id: 1,
+                title: "Juara 1 MTQ Tingkat Kecamatan",
+                category: "PRESTASI",
+                date: "22 Okt 2025",
+                description: "Siswa MIS Al-Wathoniyyah 01 berhasil meraih juara 1 pada lomba MTQ memperingati Hari Santri.",
+                image: "./IMG_2519ed.jpg",
+                fallbackImage: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 2,
+                title: "Pendaftaran Peserta Didik Baru (PPDB)",
+                category: "INFORMASI",
+                date: "01 Nov 2025",
+                description: "Gelombang pertama penerimaan siswa baru tahun ajaran 2026/2027 telah dibuka.",
+                image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&auto=format&fit=crop&q=80",
+                fallbackImage: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 3,
+                title: "Praktik Manasik Haji Siswa",
+                category: "KEGIATAN",
+                date: "15 Sep 2025",
+                description: "Seluruh siswa mengikuti simulasi manasik haji sebagai bagian dari kurikulum keagamaan.",
+                image: "./IMG_20200226.jpg",
+                fallbackImage: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 4,
+                title: "Pelepasan Kelulusan Kelas VI",
+                category: "ACARA",
+                date: "10 Jun 2025",
+                description: "Momen haru kebersamaan Dewan Guru dalam acara perpisahan kelulusan siswa-siswi kelas akhir.",
+                image: "./1751694224345.jpg",
+                fallbackImage: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&auto=format&fit=crop&q=80"
+            }
+        ];
+
+        // MENGAMBIL DATA DARI LOCAL STORAGE ATAU DEFAULT
+        function getNewsData() {
+            const saved = localStorage.getItem('mis_alwathoniyyah_news');
+            if (saved) {
+                try {
+                    return JSON.parse(saved);
+                } catch (e) {
+                    console.error("Gagal membaca LocalStorage data news", e);
+                }
+            }
+            return defaultNewsData;
+        }
+
+        // MENYIMPAN DATA KE LOCAL STORAGE
+        function saveNewsData(data) {
+            localStorage.setItem('mis_alwathoniyyah_news', JSON.stringify(data));
+            renderNewsUI();
+        }
+
+        // KATEGORI STYLE HELPERS
+        function getCategoryClass(category) {
+            switch(category) {
+                case 'PRESTASI':
+                    return 'bg-islamic-gold text-white';
+                case 'INFORMASI':
+                    return 'bg-blue-600 text-white';
+                case 'KEGIATAN':
+                    return 'bg-islamic-green-light text-white';
+                case 'ACARA':
+                    return 'bg-purple-600 text-white';
+                default:
+                    return 'bg-gray-600 text-white';
+            }
+        }
+
+        // RENDER TAMPILAN BERANDA SLIDER DAN GALERI BERITA
+        function renderNewsUI() {
+            const newsList = getNewsData();
+            const sliderTrack = document.getElementById('beranda-slider-track');
+            const galleryGrid = document.getElementById('berita-gallery-grid');
+            const adminNewsList = document.getElementById('admin-news-list');
+            const newsCountBadge = document.getElementById('news-count-badge');
+
+            if (newsCountBadge) newsCountBadge.innerText = `${newsList.length} Item`;
+
+            // 1. Render Slider Beranda
+            if (sliderTrack) {
+                sliderTrack.innerHTML = newsList.map(item => `
+                    <div class="w-full md:w-1/3 px-3 flex-shrink-0 cursor-pointer group" onclick="showPage('berita')">
+                        <div class="bg-white rounded-xl shadow-md group-hover:shadow-xl transform transition-all duration-300 group-hover:-translate-y-1 overflow-hidden h-full flex flex-col border border-gray-100">
+                            <div class="relative h-48 overflow-hidden bg-gray-200">
+                                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='${item.fallbackImage || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&auto=format&fit=crop&q=80'}'">
+                                <span class="absolute top-3 left-3 ${getCategoryClass(item.category)} text-xs font-bold px-3 py-1 rounded-full shadow">${item.category}</span>
+                            </div>
+                            <div class="p-5 flex-grow flex flex-col">
+                                <h3 class="text-lg font-bold mb-2 text-gray-800 group-hover:text-islamic-green transition-colors line-clamp-2">${item.title}</h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">${item.description}</p>
+                                <div class="mt-auto text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> ${item.date}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // 2. Render Halaman Galeri Berita
+            if (galleryGrid) {
+                galleryGrid.innerHTML = newsList.map(item => `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col border border-gray-200">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover" onerror="this.src='${item.fallbackImage || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&auto=format&fit=crop&q=80'}'">
+                        <div class="p-5 flex-grow flex flex-col">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold ${getCategoryClass(item.category)} px-2.5 py-0.5 rounded-full">${item.category}</span>
+                                <span class="text-xs text-gray-400 font-medium"><i class="fa-regular fa-calendar-alt mr-1"></i> ${item.date}</span>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-800">${item.title}</h3>
+                            <p class="text-gray-600 text-sm line-clamp-3 mb-4">${item.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // 3. Render List Admin Modal
+            if (adminNewsList) {
+                adminNewsList.innerHTML = newsList.map(item => `
+                    <div class="bg-white p-3 rounded-lg border border-gray-200 shadow-sm flex items-center justify-between gap-3">
+                        <img src="${item.image}" class="w-12 h-12 rounded object-cover border flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=100&auto=format&fit=crop&q=80'">
+                        <div class="flex-grow min-w-0">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-bold ${getCategoryClass(item.category)} px-1.5 py-0.2 rounded">${item.category}</span>
+                                <span class="text-xs text-gray-400">${item.date}</span>
+                            </div>
+                            <h5 class="text-xs font-bold text-gray-800 truncate">${item.title}</h5>
+                        </div>
+                        <div class="flex items-center space-x-1 flex-shrink-0">
+                            <button onclick="editNewsItem(${item.id})" class="p-1.5 bg-amber-100 text-amber-700 hover:bg-amber-200 rounded text-xs" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteNewsItem(${item.id})" class="p-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded text-xs" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // HAMDLER UNTUK UNGGAH GAMBAR
+        let currentUploadedImageBase64 = "";
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    currentUploadedImageBase64 = evt.target.result;
+                    document.getElementById('news-image-url').value = ""; // reset URL jika file diunggah
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // SUBMIT FORM TAMBAH / EDIT
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const editId = document.getElementById('edit-id').value;
+            const title = document.getElementById('news-title').value.trim();
+            const category = document.getElementById('news-category').value;
+            const date = document.getElementById('news-date').value.trim();
+            const urlInput = document.getElementById('news-image-url').value.trim();
+            const description = document.getElementById('news-description').value.trim();
+
+            let image = currentUploadedImageBase64 || urlInput || "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&auto=format&fit=crop&q=80";
+
+            let newsList = getNewsData();
+
+            if (editId) {
+                // Mode Edit
+                const index = newsList.findIndex(item => item.id == editId);
+                if (index !== -1) {
+                    // Gunakan gambar lama jika tidak diubah
+                    if (!currentUploadedImageBase64 && !urlInput) {
+                        image = newsList[index].image;
+                    }
+                    newsList[index] = {
+                        ...newsList[index],
+                        title, category, date, description, image
+                    };
+                }
+            } else {
+                // Mode Tambah Baru
+                const newItem = {
+                    id: Date.now(),
+                    title,
+                    category,
+                    date,
+                    description,
+                    image,
+                    fallbackImage: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=500&auto=format&fit=crop&q=80"
+                };
+                newsList.unshift(newItem); // Tambahkan ke paling atas
+            }
+
+            saveNewsData(newsList);
+            resetForm();
+            alert("Data berhasil disimpan!");
+        }
+
+        // EDIT ITEM
+        function editNewsItem(id) {
+            const newsList = getNewsData();
+            const item = newsList.find(i => i.id === id);
+            if (!item) return;
+
+            document.getElementById('edit-id').value = item.id;
+            document.getElementById('news-title').value = item.title;
+            document.getElementById('news-category').value = item.category;
+            document.getElementById('news-date').value = item.date;
+            document.getElementById('news-description').value = item.description;
+            document.getElementById('news-image-url').value = item.image.startsWith('data:') ? '' : item.image;
+            
+            document.getElementById('form-title-text').innerHTML = `<i class="fa-solid fa-pen-to-square mr-2"></i> Edit Informasi / Prestasi`;
+            currentUploadedImageBase64 = item.image.startsWith('data:') ? item.image : "";
+        }
+
+        // HAPUS ITEM
+        function deleteNewsItem(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+                let newsList = getNewsData();
+                newsList = newsList.filter(item => item.id !== id);
+                saveNewsData(newsList);
+            }
+        }
+
+        // RESET FORM
+        function resetForm() {
+            document.getElementById('news-form').reset();
+            document.getElementById('edit-id').value = "";
+            currentUploadedImageBase64 = "";
+            document.getElementById('form-title-text').innerHTML = `<i class="fa-solid fa-plus-circle mr-2"></i> Tambah Informasi / Prestasi Baru`;
+        }
+
+        // MODAL MANAGEMENT
+        function openAdminModal() {
+            renderNewsUI();
+            document.getElementById('admin-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+            resetForm();
+        }
+
+        // EKSPOR & IMPOR DATA JSON
+        function exportDataJSON() {
+            const data = getNewsData();
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `informasi_prestasi_mis_alwathoniyyah_${Date.now()}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function importDataJSON() {
+            const jsonStr = prompt("Tempelkan data JSON di sini:");
+            if (jsonStr) {
+                try {
+                    const parsed = JSON.parse(jsonStr);
+                    if (Array.isArray(parsed)) {
+                        saveNewsData(parsed);
+                        alert("Data berhasil diimpor!");
+                    } else {
+                        alert("Format JSON tidak valid!");
+                    }
+                } catch (e) {
+                    alert("Gagal membaca kode JSON.");
+                }
+            }
+        }
+
+        function resetToDefaultData() {
+            if (confirm("Kembalikan data ke awal (bawaan sistem)? Perubahan yang Anda simpan akan terhapus.")) {
+                localStorage.removeItem('mis_alwathoniyyah_news');
+                renderNewsUI();
+                alert("Data berhasil dikembalikan ke default!");
+            }
+        }
+
         // FUNGSI UTAMA UNTUK MENGGANTI HALAMAN
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page-content');
@@ -652,16 +1014,16 @@
             const track = document.getElementById('beranda-slider-track');
             if (!track) return;
             
-            const items = track.children;
-            const totalItems = items.length;
             let currentSlide = 0;
             let sliderInterval;
 
             function moveSlider() {
+                const items = track.children;
+                if (!items || items.length === 0) return;
+                const totalItems = items.length;
                 const isMobile = window.innerWidth < 768;
-                const step = 1; 
                 
-                currentSlide += step;
+                currentSlide += 1;
                 if (currentSlide >= totalItems - (isMobile ? 0 : 2)) {
                     currentSlide = 0;
                 }
@@ -685,8 +1047,11 @@
 
         // Inisialisasi awal saat dokumen siap
         document.addEventListener('DOMContentLoaded', () => {
+            checkAdminAuth();
             showPage('beranda');
+            renderNewsUI();
             initSlider();
+            checkSecretUrlLogin(); // Cek URL rahasia saat website dibuka
         });
     </script>
 </body>
