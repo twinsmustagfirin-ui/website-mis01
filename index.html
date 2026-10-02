@@ -689,9 +689,12 @@
             const search = window.location.search.toLowerCase();
 
             // Memeriksa jika URL mengandung 'admin-login', 'admin', '#admin-login', atau '?admin'
-            if (path.includes('admin-login') || path.includes('admin') || hash === '#admin-login' || search.includes('admin')) {
+            if (path.includes('admin-login') || path.includes('admin') || hash === '#admin-login' || hash === '#admin' || search.includes('admin')) {
                 if (!isAdmin) {
                     openLoginModal();
+                } else {
+                    // Jika sudah login, langsung buka panel admin secara otomatis
+                    openAdminModal();
                 }
             }
         }
@@ -735,6 +738,11 @@
                 updateAuthUI();
                 closeLoginModal();
                 openAdminModal();
+                
+                // Hapus akhiran URL (hash) #admin-login setelah berhasil login agar bersih saat di-refresh
+                if (window.location.hash.includes('admin')) {
+                    window.history.replaceState(null, null, window.location.pathname + window.location.search);
+                }
             } else {
                 document.getElementById('login-error-msg').classList.remove('hidden');
             }
@@ -1123,6 +1131,9 @@
             renderNewsUI();
             initSlider();
             checkSecretUrlLogin(); // Cek URL rahasia saat website dibuka
+            
+            // Dengarkan perubahan pada URL (misalnya jika pengguna mengetik #admin-login tanpa refresh)
+            window.addEventListener('hashchange', checkSecretUrlLogin);
         });
     </script>
 </body>
