@@ -402,7 +402,7 @@
     <div id="admin-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden backdrop-blur-sm p-4 overflow-y-auto">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
             <!-- Modal Header -->
-            <div class="bg-islamic-green text-white px-6 py-4 flex justify-between items-center">
+            <div class="bg-islamic-green text-white px-6 py-4 flex justify-between items-center flex-shrink-0">
                 <div class="flex items-center space-x-2">
                     <i class="fa-solid fa-pen-to-square text-xl text-islamic-gold"></i>
                     <h3 class="font-bold text-lg">Kelola Informasi & Prestasi Terbaru</h3>
@@ -414,8 +414,77 @@
                     <button onclick="closeAdminModal()" class="text-gray-200 hover:text-white text-2xl font-bold leading-none">&times;</button>
                 </div>
             </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-6 overflow-y-auto space-y-6 flex-grow bg-gray-50 text-gray-800">
+                
+                <!-- Form Tambah/Edit Berita -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                    <h4 id="form-title-text" class="text-md font-bold text-islamic-green mb-4 flex items-center">
+                        <i class="fa-solid fa-plus-circle mr-2"></i> Tambah Informasi / Prestasi Baru
+                    </h4>
+                    <form id="news-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <input type="hidden" id="edit-id">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Judul Informasi / Prestasi</label>
+                                <input type="text" id="news-title" required placeholder="Contoh: Juara 1 Lomba MTQ..." class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-islamic-green outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Kategori</label>
+                                <select id="news-category" class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-islamic-green outline-none bg-white">
+                                    <option value="PRESTASI">PRESTASI</option>
+                                    <option value="INFORMASI">INFORMASI</option>
+                                    <option value="KEGIATAN">KEGIATAN</option>
+                                    <option value="ACARA">ACARA</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Tanggal</label>
+                                <input type="text" id="news-date" required placeholder="Contoh: 22 Okt 2026" class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-islamic-green outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Unggah Gambar (File)</label>
+                                <input type="file" id="news-image-file" accept="image/*" onchange="handleImageUpload(event)" class="w-full px-3 py-1.5 border rounded-lg text-xs bg-white text-gray-500 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-islamic-green/10 file:text-islamic-green hover:file:bg-islamic-green/20">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Atau URL Gambar (Opsional)</label>
+                            <input type="text" id="news-image-url" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-islamic-green outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Deskripsi Singkat</label>
+                            <textarea id="news-description" rows="3" required placeholder="Tuliskan keterangan lengkap di sini..." class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-islamic-green outline-none"></textarea>
+                        </div>
+
+                        <div class="flex justify-end gap-2 pt-2">
+                            <button type="button" onclick="resetForm()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-xs font-bold hover:bg-gray-300 transition">Reset</button>
+                            <button type="submit" class="px-5 py-2 bg-islamic-green text-white rounded-lg text-xs font-bold hover:bg-islamic-green-light transition shadow">Simpan Data</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Daftar Item Berita Saat Ini -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-md font-bold text-gray-800 flex items-center">
+                            <i class="fa-solid fa-list mr-2 text-islamic-green"></i> Daftar Informasi Aktif
+                        </h4>
+                        <span id="news-count-badge" class="bg-islamic-green/10 text-islamic-green text-xs font-bold px-2.5 py-1 rounded-full">0 Item</span>
+                    </div>
+                    <div id="admin-news-list" class="space-y-3 max-h-60 overflow-y-auto pr-1">
+                        <!-- Diisi secara dinamis melalui JavaScript -->
+                    </div>
+                </div>
+
                 <!-- Opsi Ekspor/Impor Kode -->
-                <div class="border-t pt-4">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
                     <h5 class="text-xs font-bold text-gray-600 mb-2 uppercase">Manajemen Data Eksternal</h5>
                     <div class="flex flex-wrap gap-2">
                         <button onclick="exportDataJSON()" class="px-3 py-1.5 bg-blue-600 text-white rounded text-xs font-semibold hover:bg-blue-700 transition">
@@ -429,6 +498,7 @@
                         </button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
